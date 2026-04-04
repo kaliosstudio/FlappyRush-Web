@@ -1,0 +1,77 @@
+/* Custom Styles for Flappy Rush Web */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
+
+html, body {
+  font-family: 'Outfit', sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Base custom classes, handled by Tailwind via plugin/config in html mostly,
+   but we add some specific animations and glass effects here */
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.glow-btn {
+  position: relative;
+}
+.glow-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 20px 5px rgba(251, 146, 60, 0.5); /* orange-400 equivalent */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+.glow-btn:hover::before {
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float-delay {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float-delay {
+  animation: float-delay 5s ease-in-out infinite 1s;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+/* Infinite Scrolling Background */
+@keyframes slideBackground {
+  0% { background-position: 0 0; }
+  100% { background-position: -2000px 0; }
+}
+
+.bg-scrolling-mounts {
+  background-image: url('../assets/images/background/mounts.png');
+  background-repeat: repeat-x;
+  background-size: cover;
+  animation: slideBackground 45s linear infinite;
+}

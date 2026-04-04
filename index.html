@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Rush - The Ultimate Flying Adventure</title>
+    <meta name="description" content="Flap, dive, and soar through breathtaking worlds in Flappy Rush. An endless adventure awaits.">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Tailwind CSS Script for config and CDN setup -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FB923C', // vibrant orange
+                        secondary: '#38BDF8', // sky blue
+                        background: '#0F172A', // slate-900
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-white antialiased">
+    
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="glass-panel mx-4 mt-4 rounded-2xl px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="assets/images/playstore_icon_512.png" alt="Flappy Rush Icon" class="h-10 w-auto rounded-lg shadow-sm">
+                <span class="text-xl font-bold tracking-wide hidden sm:block">Flappy Rush</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="index.html#home" class="hover:text-primary transition-colors">Home</a>
+                <a href="index.html#features" class="hover:text-primary transition-colors">Features</a>
+                <a href="index.html#worlds" class="hover:text-primary transition-colors">Worlds</a>
+                <a href="privacy-policy.html" class="hover:text-primary transition-colors">Privacy</a>
+            </div>
+            
+            <div class="hidden md:block">
+                <button class="glow-btn bg-primary hover:bg-orange-500 text-white px-6 py-2 rounded-full font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-orange-500/30">
+                    Play Now
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-slate-300 hover:text-white" id="mobile-menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden absolute top-20 left-4 right-4 bg-slate-800/95 backdrop-blur-lg rounded-xl p-6 flex flex-col gap-4 shadow-2xl border border-slate-700 hidden opacity-0 transition-opacity" id="mobile-menu">
+            <a href="index.html#home" class="text-lg font-semibold hover:text-primary transition-colors border-b border-slate-700 pb-2">Home</a>
+            <a href="index.html#features" class="text-lg font-semibold hover:text-primary transition-colors border-b border-slate-700 pb-2">Features</a>
+            <a href="index.html#worlds" class="text-lg font-semibold hover:text-primary transition-colors border-b border-slate-700 pb-2">Worlds</a>
+            <a href="privacy-policy.html" class="text-lg font-semibold hover:text-primary transition-colors border-b border-slate-700 pb-2">Privacy</a>
+            <button class="bg-primary text-white w-full py-3 rounded-xl font-bold mt-2 hover:bg-orange-500">Play Now</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
+        <!-- Parallax Background Elements -->
+        <div class="absolute inset-0 z-0 bg-scrolling-mounts opacity-60"></div>
+        <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background to-transparent z-10"></div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-20 container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-center md:text-left reveal-element opacity-0 translate-y-8 transition-all duration-1000">
+                <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6 bg-gradient-to-r from-primary to-yellow-300 text-transparent bg-clip-text">
+                    Take Flight &<br>Conquer the Skies
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-lg mx-auto md:mx-0">
+                    Dodge obstacles, explore infinite breathtaking worlds, and unlock unique characters in this fast-paced arcade adventure.
+                </p>
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4">
+                    <button class="glow-btn bg-slate-800 text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 transition-transform hover:scale-105 border border-slate-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3DDC84]" fill="currentColor" viewBox="0 0 512 512"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+                        Play Store
+                    </button>
+                </div>
+            </div>
+            <div class="relative reveal-element opacity-0 translate-y-8 transition-all duration-1000 delay-300">
+                <div class="absolute inset-0 bg-secondary/20 blur-3xl rounded-full"></div>
+                <img src="assets/images/birds/blue_bird/idle/midflap.png" alt="Hero Bird" class="relative z-10 w-64 md:w-80 mx-auto animate-float drop-shadow-2xl">
+            </div>
+            <!-- Decorative particles -->
+            <div class="absolute top-1/4 right-1/4 w-3 h-3 bg-yellow-400 rounded-full animate-float-delay"></div>
+            <div class="absolute top-1/3 left-1/3 w-2 h-2 bg-pink-400 rounded-full animate-float"></div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-background relative z-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal-element opacity-0 translate-y-8 transition-all duration-1000">
+                <h2 class="text-primary font-bold tracking-wider uppercase mb-2">The Game</h2>
+                <h3 class="text-3xl md:text-5xl font-black">Why Play Flappy Rush?</h3>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-panel p-8 rounded-3xl reveal-element opacity-0 translate-y-8 transition-all duration-1000 bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                    <div class="w-14 h-14 bg-indigo-500/20 rounded-2xl flex items-center justify-center mb-6 border border-indigo-500/50 text-indigo-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-3">Fluid Controls</h4>
+                    <p class="text-slate-400 line-height-relaxed">Experience ultra-responsive, perfectly tuned tapping mechanics. Every flap counts and precision is key to survival.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="glass-panel p-8 rounded-3xl reveal-element opacity-0 translate-y-8 transition-all duration-1000 delay-100 bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                    <div class="w-14 h-14 bg-pink-500/20 rounded-2xl flex items-center justify-center mb-6 border border-pink-500/50 text-pink-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-3">Collect & Unlock</h4>
+                    <p class="text-slate-400 line-height-relaxed">Gather coins as you navigate through treacherous paths to unlock an exciting cast of unique, vibrant bird characters.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="glass-panel p-8 rounded-3xl reveal-element opacity-0 translate-y-8 transition-all duration-1000 delay-200 bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                    <div class="w-14 h-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/50 text-emerald-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-3">Infinite Worlds</h4>
+                    <p class="text-slate-400 line-height-relaxed">Travel through dynamic biomes with parallax backgrounds, customized obstacles, and beautiful particle effects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roster Section (Characters) -->
+    <section id="worlds" class="py-24 bg-slate-900 relative z-20 border-t border-slate-800 border-b">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="md:w-1/2 reveal-element opacity-0 -translate-x-8 transition-all duration-1000">
+                    <h2 class="text-3xl md:text-5xl font-black mb-6">Meet Your Crew</h2>
+                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                        Customize your journey! Unlock specialized characters like the <strong class="text-pink-400">Pink Bird</strong>, the blazing <strong class="text-orange-500">Fire Bird</strong>, or brave the night with the <strong class="text-indigo-400">Spooky Bird</strong>. 
+                        Each character brings its unique flair to the endless skies.
+                    </p>
+                    <div class="flex gap-4">
+                        <img src="assets/images/birds/pink_bird/idle/midflap.png" alt="Pink Bird" class="w-16 h-16 object-contain animate-float hover:scale-110 transition-transform cursor-pointer">
+                        <img src="assets/images/birds/fire_bird/idle/midflap.png" alt="Fire Bird" class="w-16 h-16 object-contain animate-float-delay hover:scale-110 transition-transform cursor-pointer">
+                        <img src="assets/images/birds/spooky_bird/idle/midflap.png" alt="Spooky Bird" class="w-16 h-16 object-contain animate-float hover:scale-110 transition-transform cursor-pointer" style="animation-delay: 0.5s;">
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative reveal-element opacity-0 translate-x-8 transition-all duration-1000 delay-200">
+                    <div class="glass-panel p-2 rounded-3xl rotate-2">
+                        <img src="assets/images/background/mounts.png" alt="World Showcase" class="w-full h-auto rounded-2xl border border-slate-700/50 shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA & Links -->
+    <footer class="bg-background pt-24 pb-8 relative z-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-16 reveal-element opacity-0 translate-y-8 transition-all duration-1000">
+                <h2 class="text-4xl md:text-6xl font-black mb-6">Ready to Take Off?</h2>
+                <p class="text-xl text-slate-400 mb-10">Join thousands of players in the ultimate endless flying experience today.</p>
+                <button class="glow-btn bg-primary hover:bg-orange-500 text-white px-10 py-5 rounded-full font-bold text-xl transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-orange-500/30 w-full sm:w-auto">
+                    Download Flappy Rush Now
+                </button>
+            </div>
+            
+            <hr class="border-slate-800 mb-8">
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <img src="assets/images/playstore_icon_512.png" alt="Flappy Rush Icon" class="h-8 w-auto rounded-md shadow-sm">
+                    <span class="text-lg font-bold text-slate-300">Flappy Rush © 2026. All rights reserved.</span>
+                </div>
+                <div class="flex gap-6 text-slate-400 font-medium">
+                    <a href="privacy-policy.html" class="hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-primary transition-colors">Support</a>
+                    <a href="#" class="hover:text-primary transition-colors">Press Kit</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
